@@ -6,7 +6,7 @@
 	<groupId>com.prudentcpa.customerDB</groupId>
 	<artifactId>customerDB-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
 	<name>customerDB-web</name>
 	<description>Demo project</description>
@@ -23,10 +23,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		 <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prudent.customerDB</groupId>
+			<artifactId>customerDB-domain</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.prudentcpa.customerDB</groupId>
+			<artifactId>customer-persistent</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

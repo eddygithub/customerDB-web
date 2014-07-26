@@ -1,6 +1,7 @@
 package com.prudentcpa.customerDB.web.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,21 @@ public class CustomerController {
 	}
 	
 	@RequestMapping
-	public List<Customer> getAllCustomers(){
-		return crmService.getAllCustomers();
+	public ResponseEntity<List<Customer>> getAllCustomers(){
+		//TODO remove when UI is done
+		List<Customer> customerList = new ArrayList<Customer>();
+		//return crmService.getAllCustomers();
+		
+		Customer customer = new Customer("John", "", "Chan", "123");
+		
+		customerList.add(customer);
+		return new ResponseEntity<List<Customer>>(customerList, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value="/add")
+	@RequestMapping(method = RequestMethod.PUT, value="/customer")
 	ResponseEntity<Customer> addCustomer(@RequestBody Customer customer){
 
-		Customer addedCustomer = crmService.addCustomer(customer);
+		Customer addedCustomer = crmService.createNewCustomer(customer);
 		
 		URI uriOfNewCustomer = ServletUriComponentsBuilder.fromCurrentContextPath()
 				.path("/customers/{customer}")
@@ -47,4 +55,10 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(addedCustomer, httpHeaders, HttpStatus.CREATED);
 	}
 	
+	@RequestMapping(method = RequestMethod.POST, value="/customer")
+	ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
+		crmService.updateCustomer(customer);
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+
+	}
 }

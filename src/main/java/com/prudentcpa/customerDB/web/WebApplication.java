@@ -9,10 +9,17 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
+
+import com.prudentcpa.customerDB.repository.PersistentApplication;
+import com.prudentcpa.customerDB.web.service.FileSystemPhotoFileService;
 
 @ComponentScan
 @Configuration
 @EnableAutoConfiguration
+@EnableGemfireRepositories
+@Import(value={PersistentApplication.class})
 public class WebApplication extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {
@@ -27,7 +34,12 @@ public class WebApplication extends SpringBootServletInitializer {
 	
 //	use for file upload
 	@Bean
-	MultipartConfigElement multipartConfigElement(){
+	public MultipartConfigElement multipartConfigElement(){
 		return new MultipartConfigElement("");
+	}
+
+	@Bean
+	public FileSystemPhotoFileService fileSystemPhotoFileService(){
+		return new FileSystemPhotoFileService("/Users/zhue/Desktop");
 	}
 }
